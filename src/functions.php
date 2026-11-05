@@ -34,6 +34,8 @@ function loadEmployees(string $path): array
         return [];
     }
 
+    $headers[0] = preg_replace('/^\xEF\xBB\xBF/', '', (string) $headers[0]) ?? $headers[0];
+
     $employees = [];
     while (($values = fgetcsv($handle, 0, ';')) !== false) {
         if (count($values) !== count($headers)) {
